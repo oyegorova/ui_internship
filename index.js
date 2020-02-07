@@ -61,5 +61,14 @@ function convertToF(celsius) {
 
 //Task 3
 function isBoolean(bool) {
-  return typeof bool === "boolean" ? true : false;
+  return typeof bool === "boolean";
 }
+
+//Task 4
+function nextInLine(arr, item) {
+  arr.push(item);
+  const delItem = arr[0];
+  arr.shift();
+  return delItem;
+}
+
