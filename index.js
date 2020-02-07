@@ -61,8 +61,5 @@ function convertToF(celsius) {
 
 //Task 3
 function isBoolean(bool) {
-  if (typeof bool === "boolean") {
-    return true;
-  }
-  return false;
+  return typeof bool === "boolean" ? true : false;
 }
