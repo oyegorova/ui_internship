@@ -52,3 +52,9 @@ function golfScoreRedone(par, strokes) {
       break;
   }
 }
+
+//Task 2
+function convertToF(celsius) {
+  let fahrenheit = (celsius * 9) / 5 + 32;
+  return fahrenheit;
+}
