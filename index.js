@@ -67,8 +67,6 @@ function isBoolean(bool) {
 //Task 4
 function nextInLine(arr, item) {
   arr.push(item);
-  const delItem = arr[0];
-  arr.shift();
-  return delItem;
+  return arr.shift();
 }
-
+//Task 5
