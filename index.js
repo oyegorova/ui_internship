@@ -140,7 +140,3 @@ const factorializeRec = n => {
     return n * factorializeRec(n - 1);
   }
 };
-
-//Task 9
-
-const getNumbers = str => str.match(/[0-9]/g);
