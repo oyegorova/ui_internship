@@ -122,10 +122,13 @@ const randomFraction = () => Math.round(Math.random() * 10);
 //Task 8
 
 const factorialize = n => {
-    let result = 1;
-    while(n){
-        result *= n--
-    }
-    return result;
+  let result = 1;
+  while (n) {
+    result *= n--;
+  }
+  return result;
 };
 
+//Task 9
+
+const getNumbers = str => str.match(/[0-9]/g);
