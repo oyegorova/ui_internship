@@ -106,7 +106,6 @@ function lookUpProfile(firstName, prop) {
   }
   return "No such contact";
 }
-console.log(lookUpProfile("Sherlok", "lastNme"));
 
 //Task 6
 
@@ -115,5 +114,12 @@ function reverseString(str) {
     .split("")
     .reverse()
     .join("");
+}
+
+//Task 7
+
+function randomFraction() {
+  const number = Math.round(Math.random() * 10);
+  return number;
 }
 
