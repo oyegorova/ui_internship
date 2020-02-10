@@ -107,3 +107,13 @@ function lookUpProfile(firstName, prop) {
   return "No such contact";
 }
 console.log(lookUpProfile("Sherlok", "lastNme"));
+
+//Task 6
+
+function reverseString(str) {
+  return str
+    .split("")
+    .reverse()
+    .join("");
+}
+
