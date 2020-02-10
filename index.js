@@ -109,8 +109,21 @@ function lookUpProfile(firstName, prop) {
 
 //Task 6
 
-const reverseString = (str) => str.split("").reverse().join("");
+const reverseString = str =>
+  str
+    .split("")
+    .reverse()
+    .join("");
 
 //Task 7
 
 const randomFraction = () => Math.round(Math.random() * 10);
+
+//Task 11
+
+const findLongestWord = str => {
+  let longestWord = str.split(" ").sort((a, b) => {
+    return b.length - a.length;
+  });
+  return longestWord[0].length;
+};
