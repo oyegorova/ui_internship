@@ -126,4 +126,24 @@ const findLongestWord = str => {
     return b.length - a.length;
   });
   return longestWord[0].length;
+//Task 8
+//Variant 1
+const factorialize = n => {
+  if (n == 0 || n == 1) return n;
+  let result = n;
+  while (n > 1) {
+    n--;
+    result *= n;
+  }
+
+  return result;
+};
+console.log(factorialize(3));
+//Variant 2
+const factorializeRec = n => {
+  if (n == 1 || n == 0) {
+    return n;
+  } else {
+    return n * factorializeRec(n - 1);
+  }
 };
