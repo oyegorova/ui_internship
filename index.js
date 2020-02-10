@@ -120,13 +120,21 @@ const reverseString = str =>
 const randomFraction = () => Math.round(Math.random() * 10);
 
 //Task 8
-
+//Variant 1
 const factorialize = n => {
   let result = 1;
   while (n) {
     result *= n--;
   }
   return result;
+};
+//Variant 2
+const factorializeRec = n => {
+  if (n == 1) {
+    return n;
+  } else {
+    return n * factorializeRec(n - 1);
+  }
 };
 
 //Task 9
