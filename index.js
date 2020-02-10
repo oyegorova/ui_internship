@@ -109,8 +109,16 @@ function lookUpProfile(firstName, prop) {
 
 //Task 6
 
-const reverseString = (str) => str.split("").reverse().join("");
+const reverseString = str =>
+  str
+    .split("")
+    .reverse()
+    .join("");
 
 //Task 7
 
 const randomFraction = () => Math.round(Math.random() * 10);
+
+//Task 10
+
+const trimWhiteSpaces = str => str.split(" ").join("");
