@@ -122,15 +122,19 @@ const randomFraction = () => Math.round(Math.random() * 10);
 //Task 8
 //Variant 1
 const factorialize = n => {
+  if (n == 0) return n;
   let result = 1;
   while (n) {
-    result *= n--;
+    result *= n;
+    n--;
   }
+
   return result;
 };
+console.log(factorialize(0));
 //Variant 2
 const factorializeRec = n => {
-  if (n == 1) {
+  if (n == 1 || n == 0) {
     return n;
   } else {
     return n * factorializeRec(n - 1);
