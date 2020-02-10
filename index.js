@@ -109,17 +109,8 @@ function lookUpProfile(firstName, prop) {
 
 //Task 6
 
-function reverseString(str) {
-  return str
-    .split("")
-    .reverse()
-    .join("");
-}
+const reverseString = (str) => str.split("").reverse().join("");
 
 //Task 7
 
-function randomFraction() {
-  const number = Math.round(Math.random() * 10);
-  return number;
-}
-
+const randomFraction = () => Math.round(Math.random() * 10);
