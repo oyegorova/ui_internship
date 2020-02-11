@@ -140,3 +140,12 @@ const factorializeRec = n => {
     return n * factorializeRec(n - 1);
   }
 };
+
+//Task 15
+
+const confirmEnding = (str, target) => {
+  if (target == str.substring(str.length - target.length, str.length)) {
+    return true;
+  }
+  return false;
+};
