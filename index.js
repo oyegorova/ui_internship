@@ -140,3 +140,10 @@ const factorializeRec = n => {
     return n * factorializeRec(n - 1);
   }
 };
+
+//Task 14
+
+const cloneArray = arr => {
+  let newArr = [...arr];
+  return newArr;
+};
