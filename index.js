@@ -119,6 +119,9 @@ const reverseString = str =>
 
 const randomFraction = () => Math.round(Math.random() * 10);
 
+//Task 9
+
+const getNumbers = str => str.match(/[0-9]/g);
 //Task 8
 //Variant 1
 const factorialize = n => {
