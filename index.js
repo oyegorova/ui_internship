@@ -131,7 +131,7 @@ const factorialize = n => {
 
   return result;
 };
-console.log(factorialize(3));
+
 //Variant 2
 const factorializeRec = n => {
   if (n == 1 || n == 0) {
@@ -139,4 +139,10 @@ const factorializeRec = n => {
   } else {
     return n * factorializeRec(n - 1);
   }
+};
+
+//Task 13
+
+const largestOfFour = arr => {
+  return arr.map(a => Math.max(...a));
 };
