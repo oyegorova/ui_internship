@@ -158,6 +158,14 @@ const factorializeRec = n => {
   }
 };
 
+//Task 15
+
+const confirmEnding = (str, target) => {
+  if (target == str.substring(str.length - target.length, str.length)) {
+    return true;
+  }
+  return false;
+}
 
 //Task 14
 
