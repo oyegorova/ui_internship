@@ -147,3 +147,14 @@ const factorializeRec = n => {
     return n * factorializeRec(n - 1);
   }
 };
+
+//Task 12
+
+const titleCase = str => {
+  return str
+    .split(/\s+/)
+    .map(element => {
+      return element[0].toUpperCase() + element.substring(1).toLowerCase();
+    })
+    .join(" ");
+};
