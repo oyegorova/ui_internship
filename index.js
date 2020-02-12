@@ -119,6 +119,15 @@ const reverseString = str =>
 
 const randomFraction = () => Math.round(Math.random() * 10);
 
+//Task 11
+
+const findLongestWord = str => {
+  let longestWord = str.split(" ").sort((a, b) => {
+    return b.length - a.length;
+  });
+  return longestWord[0].length;
+};
+
 //Task 10
 
 const trimWhiteSpaces = str => str.split(" ").join("");
@@ -126,6 +135,7 @@ const trimWhiteSpaces = str => str.split(" ").join("");
 //Task 9
 
 const getNumbers = str => str.match(/[0-9]/g);
+
 //Task 8
 //Variant 1
 const factorialize = n => {
