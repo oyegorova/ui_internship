@@ -119,6 +119,23 @@ const reverseString = str =>
 
 const randomFraction = () => Math.round(Math.random() * 10);
 
+//Task 11
+
+const findLongestWord = str => {
+  let longestWord = str.split(" ").sort((a, b) => {
+    return b.length - a.length;
+  });
+  return longestWord[0].length;
+};
+
+//Task 10
+
+const trimWhiteSpaces = str => str.split(" ").join("");
+
+//Task 9
+
+const getNumbers = str => str.match(/[0-9]/g);
+
 //Task 8
 //Variant 1
 const factorialize = n => {
@@ -131,7 +148,7 @@ const factorialize = n => {
 
   return result;
 };
-console.log(factorialize(3));
+
 //Variant 2
 const factorializeRec = n => {
   if (n == 1 || n == 0) {
@@ -148,4 +165,28 @@ const confirmEnding = (str, target) => {
     return true;
   }
   return false;
+}
+
+//Task 14
+
+const cloneArray = arr => {
+  let newArr = [...arr];
+  return newArr;
+}
+
+//Task 13
+
+const largestOfFour = arr => {
+  return arr.map(a => Math.max(...a));
+}
+
+//Task 12
+
+const titleCase = str => {
+  return str
+    .split(/\s+/)
+    .map(element => {
+      return element[0].toUpperCase() + element.substring(1).toLowerCase();
+    })
+    .join(" ");
 };
