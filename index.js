@@ -127,6 +127,15 @@ const findLongestWord = str => {
   });
   return longestWord[0].length;
 };
+
+//Task 10
+
+const trimWhiteSpaces = str => str.split(" ").join("");
+
+//Task 9
+
+const getNumbers = str => str.match(/[0-9]/g);
+
 //Task 8
 //Variant 1
 const factorialize = n => {
@@ -147,4 +156,15 @@ const factorializeRec = n => {
   } else {
     return n * factorializeRec(n - 1);
   }
+};
 
+//Task 12
+
+const titleCase = str => {
+  return str
+    .split(/\s+/)
+    .map(element => {
+      return element[0].toUpperCase() + element.substring(1).toLowerCase();
+    })
+    .join(" ");
+};
