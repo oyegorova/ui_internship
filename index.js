@@ -159,6 +159,13 @@ const factorializeRec = n => {
 };
 
 
+//Task 14
+
+const cloneArray = arr => {
+  let newArr = [...arr];
+  return newArr;
+}
+
 //Task 13
 
 const largestOfFour = arr => {
