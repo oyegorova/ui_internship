@@ -119,6 +119,10 @@ const reverseString = str =>
 
 const randomFraction = () => Math.round(Math.random() * 10);
 
+//Task 10
+
+const trimWhiteSpaces = str => str.split(" ").join("");
+
 //Task 9
 
 const getNumbers = str => str.match(/[0-9]/g);
