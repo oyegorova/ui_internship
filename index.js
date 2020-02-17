@@ -317,3 +317,169 @@ const arrayLeaders = arr => {
     return elem > arr.slice(i + 1, arr.length).reduce((a, b) => a + b, 0);
   });
 };
+
+//Task 36
+
+const rowWeights = arr => {
+  const finalArr = [];
+  const valueArr1 = arr
+    .filter((elem, i) => {
+      return i % 2 == 0;
+    })
+    .reduce((a, b) => {
+      return a + b;
+    }, 0);
+  const valueArr2 = arr
+    .filter((elem, i) => {
+      return i % 2 == 0 ? false : true;
+    })
+    .reduce((a, b) => {
+      return a + b;
+    }, 0);
+  finalArr.push(valueArr1, valueArr2);
+  return finalArr;
+};
+
+//Task 37
+function isPrime(val) {
+  let i = 2;
+  const limit = Math.sqrt(val);
+  while (i <= limit) {
+    if (val % i === 0) {
+      return false;
+    }
+    i += 1;
+  }
+  return true;
+}
+const minimumNumber = arr => {
+  sumArr = arr.reduce((a, b) => {
+    return a + b;
+  }, 0);
+  let nextPrime;
+  let counter = 1;
+  if (isPrime(sumArr)) return 0;
+  while (!nextPrime) {
+    if (isPrime(sumArr + counter)) {
+      nextPrime = sumArr + counter;
+    }
+    counter++;
+  }
+  return counter - 1;
+};
+
+//Task 38
+
+const maxProduct = arr => {
+  let sums = [];
+  for (let i = 0; i < arr.length - 1; i++) {
+    sums[i] = arr[i] * arr[i + 1];
+  }
+  sums.sort((a, b) => b - a);
+  return sums[0];
+};
+
+//Task 39
+
+const uniqueInOrder = value => {
+  if (typeof value === String) {
+    let arr = value.split("");
+    return arr.filter((element, ind) => arr.indexOf(element) == ind);
+  } else {
+    return value.filter((element, ind) => value.indexOf(element) == ind);
+  }
+};
+
+//Task 40
+
+const findFriend = line => {
+  let friendMask = "red";
+  let counter = 0;
+
+  for (let i = 0; i < line.length; i++) {
+    let elem = line[i];
+    if (elem === friendMask) {
+      if (line[i - 1] === "blue" && line[i + 1] === "blue") {
+        counter += 1;
+      } else if (line[i + 1] === "blue" && line[i + 2] === "blue") {
+        counter += 1;
+      } else if (line[i - 1] === "blue" && line[i - 2] === "blue") {
+        counter += 1;
+      }
+    }
+  }
+  return counter;
+};
+
+//Task 41
+const sortByBits = arr => {
+  return arr
+    .map(a => ({ value: a, binary: a.toString(2) }))
+    .sort((a, b) => {
+      a = a.binary;
+      b = b.binary;
+      if (a.replace(/[0]+/g, "") > b.replace(/[0]+/g, "")) return 1;
+      if (b.replace(/[0]+/g, "") > a.replace(/[0]+/g, "")) return -1;
+      if (a.replace(/[0]+/g, "") === b.replace(/[0]+/g, "")) {
+        if (parseInt(a, 2) > parseInt(b, 2)) return 1;
+        else if (parseInt(a, 2) < parseInt(b, 2)) return -1;
+      }
+    })
+
+    .map(v => v.value);
+};
+
+//Task 42
+
+const firstNSmallest = (arr, num) => {
+  if (num == 0) return [];
+  for (let i = 0; i < arr.length + 1; i++) {
+    let max = Math.max(...arr);
+    if (arr.length > num) {
+      arr.splice(arr.indexOf(max), 1);
+    }
+  }
+  return arr;
+};
+
+//Task 43
+
+const findCloseIndex = (str, index) => {
+  const arr = str.split("");
+  // arr.reduce((accum, curVal, i) => {
+  //   let counter = 0;
+  //   let match;
+  //   if (curVal === "(") {
+  //     counter++;
+  //   } else if (curVal === ")") {
+  //     counter--;
+  //   } else if (i === index) {
+  //     match = counter;
+  //   } else if (counter === 0) {
+  //     return i;
+  //   }
+  // });
+  arr.find((elem, i) => {
+    let counter = 0;
+    let match;
+    if (elem === "(") {
+      counter++;
+    } else if (elem === ")") {
+      counter--;
+    } else if (i === index) {
+      match = counter;
+    } else if (counter === 0) {
+      return i == true;
+    }
+  });
+};
+console.log(findCloseIndex("((1)23(45))(aB)", 0));
+console.log(findCloseIndex("((1)23(45))(aB)", 1));
+console.log(findCloseIndex("((1)23(45))(aB)", 2));
+console.log(findCloseIndex("((1)23(45))(aB)", 6));
+console.log(findCloseIndex("((1)23(45))(aB)", 11));
+console.log(findCloseIndex("(g(At)IO(f)(tM(qk)YF(n)Nr(E)))", 11));
+console.log(findCloseIndex("(g(At)IO(f)(tM(qk)YF(n)Nr(E)))", 0));
+console.log(findCloseIndex("(>_(va)`?(h)C(as)(x(hD)P|(fg)))", 19));
+
+//Task 44
