@@ -446,40 +446,54 @@ const firstNSmallest = (arr, num) => {
 
 const findCloseIndex = (str, index) => {
   const arr = str.split("");
-  // arr.reduce((accum, curVal, i) => {
-  //   let counter = 0;
-  //   let match;
-  //   if (curVal === "(") {
-  //     counter++;
-  //   } else if (curVal === ")") {
-  //     counter--;
-  //   } else if (i === index) {
-  //     match = counter;
-  //   } else if (counter === 0) {
-  //     return i;
-  //   }
-  // });
-  arr.find((elem, i) => {
-    let counter = 0;
-    let match;
-    if (elem === "(") {
-      counter++;
-    } else if (elem === ")") {
+  if (arr[index] != ")" && arr[index] != "(") {
+    return -1;
+  }
+  arr.splice(0, index);
+  let counter = 0;
+  for (let j = 0; j < arr.length; j++) {
+    if (arr[j] == ")") {
       counter--;
-    } else if (i === index) {
-      match = counter;
-    } else if (counter === 0) {
-      return i == true;
+      if (counter == 0) return j + index;
+    } else if (arr[j] == "(") {
+      counter++;
     }
-  });
+  }
 };
-console.log(findCloseIndex("((1)23(45))(aB)", 0));
-console.log(findCloseIndex("((1)23(45))(aB)", 1));
-console.log(findCloseIndex("((1)23(45))(aB)", 2));
-console.log(findCloseIndex("((1)23(45))(aB)", 6));
-console.log(findCloseIndex("((1)23(45))(aB)", 11));
-console.log(findCloseIndex("(g(At)IO(f)(tM(qk)YF(n)Nr(E)))", 11));
-console.log(findCloseIndex("(g(At)IO(f)(tM(qk)YF(n)Nr(E)))", 0));
-console.log(findCloseIndex("(>_(va)`?(h)C(as)(x(hD)P|(fg)))", 19));
 
 //Task 44
+
+function SimTime() {
+  this.time = 0;
+  this.realtime = 0;
+  this.speed = 1;
+  this.get = function() {
+    return this.time;
+  };
+  this.set_speed = function(new_speed) {
+    this.speed = new_speed;
+    //this.realtime *= new_speed;
+  };
+  this.update = function(current_realtime) {
+    this.time = this.time + (current_realtime - this.realtime) * this.speed;
+    this.realtime = current_realtime;
+  };
+}
+
+//Task 45
+
+const findEqualIndex = arr => {
+  let sum = 0;
+  let leftSum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  for (let i = 0; i < arr.length; i++) {
+    sum -= arr[i];
+    if (leftSum === sum) {
+      return i;
+    }
+    leftSum += arr[i];
+  }
+  return -1;
+};
