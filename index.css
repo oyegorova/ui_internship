@@ -1,0 +1,20 @@
+/* Variant 4 */
+.Parent {
+  height: 200px;
+  width: 200px;
+  background-color: gold;
+  display: table;
+  position: absolute;
+}
+.inner {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.Child {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  background-color: silver;
+}
