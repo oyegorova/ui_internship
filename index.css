@@ -1,0 +1,14 @@
+/* Variant 1 */
+.Parent {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 200px;
+  width: 200px;
+  background-color: silver;
+}
+.Child {
+  height: 100px;
+  width: 100px;
+  background-color: gold;
+}
