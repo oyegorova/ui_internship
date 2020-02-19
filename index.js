@@ -497,3 +497,70 @@ const findEqualIndex = arr => {
   }
   return -1;
 };
+
+//Task 46
+
+function runningAverage(num) {
+  let total = 0;
+  let calls = 0;
+  return function(n) {
+    calls++;
+    total += n;
+    return Math.round((total / calls) * 100) / 100;
+  };
+}
+
+//Task 47
+
+const stringExpansion = str => {
+  return str.replace(/(\d)([^\d]*)/g, function(match) {
+    return match.slice(1).repeat(match[0]);
+  });
+};
+
+//Task 48
+
+const followTheSpy = arr => {
+  let correctRoute = [];
+  arr
+    .map(elem => {
+      if (!arr.find(country => country[1] === elem[0])) {
+        correctRoute.push(elem[0]);
+        correctRoute.push(elem[1]);
+      }
+    })
+    .map(() => {
+      arr.map(elem => {
+        elem[0] === correctRoute[correctRoute.length - 1] &&
+          correctRoute.push(elem[1]);
+      });
+    });
+  return correctRoute.join(",");
+};
+
+//Task 49
+
+const humanYearsCatYearsDogYears = humYears => {
+  let yearsArr = [humYears, 0, 0];
+  if (humYears === 1) {
+    yearsArr[1] = 15;
+    yearsArr[2] = 15;
+  } else if (humYears === 2) {
+    yearsArr[1] = 24;
+    yearsArr[2] = 24;
+  } else if (humYears >= 3) {
+    yearsArr[1] = 24 + 4 * (humYears - 2);
+    yearsArr[2] = 24 + 5 * (humYears - 2);
+  }
+  return yearsArr;
+};
+
+//Task 50
+
+String.prototype.camelCase = function() {
+  return this.split(" ")
+    .map(elem => {
+      return elem.charAt(0).toUpperCase() + elem.slice(1);
+    })
+    .join("");
+};
