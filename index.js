@@ -564,3 +564,88 @@ String.prototype.camelCase = function() {
     })
     .join("");
 };
+
+//Task 51
+
+const abbreviatedName = name => {
+  return name
+    .split(" ")
+    .map((elem, i) => {
+      if (i > 0) {
+        return elem.charAt(0) + ".";
+      }
+      return elem;
+    })
+    .join(" ");
+};
+
+//Task 52
+
+const sumAll = arr => {
+  if (arr[1] > arr[0]) {
+    let summArr = [];
+    let counter = arr[0] - 1;
+    for (let i = arr[0]; i <= arr[1]; i++) {
+      counter++;
+      summArr.push(counter);
+    }
+    return summArr.reduce((a, b) => a + b);
+  } else if (arr[0] > arr[1]) {
+    let summArr = [];
+    let counter = arr[1] - 1;
+    for (let i = arr[1]; i <= arr[0]; i++) {
+      counter++;
+      summArr.push(counter);
+    }
+    return summArr.reduce((a, b) => a + b);
+  }
+};
+
+//Task 53
+
+const diffArray = (arr1, arr2) => {
+  let filterArr1 = arr1.filter(x => arr2.indexOf(x) === -1);
+  let filterArr2 = arr2.filter(x => arr1.indexOf(x) === -1);
+  return filterArr1.concat(filterArr2);
+};
+
+//Task 54
+
+const convertToRoman = num => {
+  let lookup = {
+    M: 1000,
+    CM: 900,
+    D: 500,
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1
+  };
+  let roman = "";
+  for (let i in lookup) {
+    while (num >= lookup[i]) {
+      roman += i;
+      num -= lookup[i];
+    }
+  }
+  return roman;
+};
+
+//Task 55
+
+const whatIsInAName = (collection, source) => {
+  let arr = [];
+  let keys = Object.keys(source);
+  let = collection.filter(obj => {
+    return keys.every(key => {
+      return obj.hasOwnProperty(key) && obj[key] === source[key];
+    });
+  });
+  return arr;
+};
