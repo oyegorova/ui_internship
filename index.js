@@ -195,7 +195,7 @@ const titleCase = str => {
 
 const repeatStringNumTime = (str, num) => {
   let newStr = "";
-  for (let i = 0; i < num; i++) {
+  for (let i = 0; i <= num; i++) {
     newStr += str;
   }
   return newStr;
@@ -217,10 +217,8 @@ const truncateString = (str, num) => {
 
 const humanize_format = num => {
   if (num === undefined) return "";
+  if (num === 0) return "0";
   switch (String(num)[String(num).length - 1]) {
-    case "0":
-      return num;
-      break;
     case "1":
       return num + "st";
       break;
@@ -265,17 +263,13 @@ const checkLetters = arr => {
       count++;
     }
   }
-
-  if (count == arr2.length) {
-    return true;
-  }
-  return false;
+  return count == arr2.length ? true : false;
 };
 
 //Task 22
 
 const removeFalsyValues = arr => {
-  return arr.filter(element => Boolean(element) == true);
+  return arr.filter(element => Boolean(element));
 };
 
 //Task 23
