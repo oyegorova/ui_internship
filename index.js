@@ -649,3 +649,43 @@ const whatIsInAName = (collection, source) => {
   });
   return arr;
 };
+
+//Task 56
+
+const myReplace = (str, before, after) => {
+  let newStr = str.replace(before, after);
+  if (before.charAt(0).toUpperCase() == before.charAt(0)) {
+    let newAfter = after[0].toUpperCase() + after.slice(1);
+    return newStr.replace(after, newAfter);
+  }
+  return newStr;
+};
+
+//Task 57
+
+const translatePigLatin = str => {
+  return str
+    .replace(/^[aeiou]\w*/, "$&way")
+    .replace(/(^[^aeiou]+)(\w*)/, "$2$1ay");
+};
+
+//Task 58
+
+const findLetter = str => {
+  let lettersArr = str.split("");
+  for (let i = 0; i < lettersArr.length; i++) {
+    if (lettersArr[i].charCodeAt() != lettersArr[i + 1].charCodeAt() - 1) {
+      return String.fromCharCode(lettersArr[i].charCodeAt() + 1);
+    } else if (i == lettersArr.length - 2) {
+      return undefined;
+    }
+  }
+};
+
+//Task 59
+
+const uniteUnique = (...arrs) => {
+  return arrs.reduce((accum, currentArr) => {
+    return accum.concat(currentArr.filter(x => accum.indexOf(x) === -1));
+  });
+};
