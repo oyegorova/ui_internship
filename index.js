@@ -201,30 +201,28 @@ const getAverage = marks => {
 //Task 27
 
 class Human {
-  constructor() {}
+  constructor(name) {
+    this.name = name;
+  }
 }
 class Man extends Human {
   sex = "male";
   constructor(name) {
-    super();
-    this.name = name;
+    super(name);
   }
 }
 class Woman extends Human {
   sex = "female";
-  constructor(name) {
-    super();
-    this.name = name;
+  constructor() {
+    super(name);
   }
 }
 
 class God {
   constructor() {}
   static create(manName, womanName) {
-    let man = new Man();
-    man.name = manName;
-    let woman = new Woman();
-    woman.name = womanName;
+    let man = new Man(manName);
+    let woman = new Woman(womanName);
     const arr = [];
     arr.push(man);
     arr.push(woman);
@@ -235,20 +233,10 @@ class God {
 //Task 28
 
 const getVowelCount = str => {
-  let volwesCount = 0;
+  let vowelsCount = 0;
   let internArr = str.split("");
-  for (let i = 0; i < internArr.length; i++) {
-    if (
-      internArr[i] === "a" ||
-      internArr[i] === "e" ||
-      internArr[i] === "i" ||
-      internArr[i] === "o" ||
-      internArr[i] === "u"
-    ) {
-      volwesCount++;
-    }
-  }
-  return volwesCount;
+  const neededCharacters = ["a", "e", "i", "o", "u"];
+  return internArr.filter(element => neededCharacters.includes(element)).length;
 };
 
 //Task 29
@@ -289,13 +277,13 @@ const numberToArray = num => {
 //Task 33
 
 const arrayPlusArray = (arr1, arr2) => {
-  let corArr = arr1.length >= arr2.length ? arr1 : arr2;
-  let anArr = corArr == arr1 ? arr2 : arr1;
-  return corArr.map((el, ind) => {
-    if (anArr[ind] === undefined) {
-      anArr[ind] = 0;
+  let biggerArr = arr1.length >= arr2.length ? arr1 : arr2;
+  let smallerArr = biggerArr == arr1 ? arr2 : arr1;
+  return biggerArr.map((el, ind) => {
+    if (!smallerArr[ind]) {
+      smallerArr[ind] = 0;
     }
-    return el + anArr[ind];
+    return el + smallerArr[ind];
   });
 };
 
