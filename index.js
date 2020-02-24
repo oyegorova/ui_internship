@@ -689,3 +689,78 @@ const uniteUnique = (...arrs) => {
     return accum.concat(currentArr.filter(x => accum.indexOf(x) === -1));
   });
 };
+
+//Task 60
+
+const convertHTML = str => {
+  const regExp = [/&/g, /</g, />/g, /"/g, /'/g];
+  const charactersAddArr = ["&amp;", "&lt;", "&gt;", "&quot;", "&apos;"];
+  for (let i = 0; i < charactersAddArr.length; i++) {
+    str = regExp[i][Symbol.replace](str, charactersAddArr[i]);
+  }
+  return str;
+};
+
+//Task 61
+
+const spinalCase = str => {
+  return str
+    .split(/\s|_|(?=[A-Z])/g)
+    .join("-")
+    .toLowerCase();
+};
+
+//Task 62
+
+const swapCases = str => {
+  let re = /([a-z]+)|([A-Z]+)/g;
+  return str.replace(re, (match, chr) => {
+    return chr ? match.toUpperCase() : match.toLowerCase();
+  });
+};
+
+//Task 63
+
+const insert = (str, insertable, position = 0) => {
+  if (insertable == undefined) return str;
+  const strBefore = str.substring(0, position);
+  const strAfter = str.substring(position);
+  const finalStr = strBefore + `${insertable} ` + strAfter;
+  return finalStr;
+};
+
+//Task 64
+
+const sumFibs = n => {
+  let arr = [0, 1];
+  for (let i = 2; i < n + 1; i++) {
+    arr.push(arr[i - 2] + arr[i - 1]);
+  }
+  return arr.filter(elem => elem % 2 != 0 && elem <= n).reduce((a, b) => a + b);
+};
+
+//Task 65
+
+const gcd = (a, b) => {
+  if (!b) {
+    return a;
+  }
+  return gcd(b, a % b);
+};
+
+const lcm = (a, b) => {
+  return Math.abs(a * b) / gcd(a, b);
+};
+
+const range = (start, end) => {
+  return [...Array(end - start + 1)].map((_, i) => start + i);
+};
+
+const smallestCommons = arr => {
+  const start = Math.min(...arr);
+  const end = Math.max(...arr);
+
+  return range(start, end).reduce(function(a, b) {
+    return lcm(a, b);
+  });
+};
