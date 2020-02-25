@@ -191,6 +191,7 @@ const titleCase = str => {
     .join(" ");
 };
 
+
 //Task 16
 
 const repeatStringNumTime = (str, num) => {
@@ -307,4 +308,117 @@ const rot13Encoder = str => {
     }
   });
   return String.fromCharCode(...codedArr);
+//Task 26
+
+const getAverage = marks => {
+  const allValues = marks.reduce((accum, curVal) => accum + curVal);
+  return Math.round(allValues / marks.length);
+};
+
+//Task 27
+
+class Human {
+  constructor(name) {
+    this.name = name;
+  }
+}
+class Man extends Human {
+  sex = "male";
+  constructor(name) {
+    super(name);
+  }
+}
+class Woman extends Human {
+  sex = "female";
+  constructor() {
+    super(name);
+  }
+}
+
+class God {
+  constructor() {}
+  static create(manName, womanName) {
+    let man = new Man(manName);
+    let woman = new Woman(womanName);
+    const arr = [];
+    arr.push(man);
+    arr.push(woman);
+    return arr;
+  }
+}
+
+//Task 28
+
+const getVowelCount = str => {
+  let vowelsCount = 0;
+  let internArr = str.split("");
+  const neededCharacters = ["a", "e", "i", "o", "u"];
+  return internArr.filter(element => neededCharacters.includes(element)).length;
+};
+
+//Task 29
+
+const removeDuplicates = arr => {
+  return arr.filter((element, ind) => arr.indexOf(element) == ind);
+};
+
+//Task 30
+
+const peopleInBus = busStops => {
+  const getInt = busStops.reduce((accum, curVal) => {
+    return accum + curVal[1];
+  }, 0);
+  const getOut = busStops.reduce((accum, curVal) => {
+    return accum + curVal[0];
+  }, 0);
+  return getOut - getInt;
+};
+
+//Task 31
+
+const reverseStringInRange = (str, range) => {
+  const arrOfStr = str.split("");
+  const piceOfArr = arrOfStr.slice(range[0], range[1] + 1).reverse();
+  arrOfStr.splice(range[0], piceOfArr.length, ...piceOfArr);
+  return arrOfStr;
+};
+
+//Task 32
+
+const numberToArray = num => {
+  return String(num)
+    .split("")
+    .reverse();
+};
+
+//Task 33
+
+const arrayPlusArray = (arr1, arr2) => {
+  let biggerArr = arr1.length >= arr2.length ? arr1 : arr2;
+  let smallerArr = biggerArr == arr1 ? arr2 : arr1;
+  return biggerArr.map((el, ind) => {
+    if (!smallerArr[ind]) {
+      smallerArr[ind] = 0;
+    }
+    return el + smallerArr[ind];
+  });
+};
+
+//Task 34
+
+const maxTripletSum = arr => {
+  const sortedArrWithoutDubl = arr
+    .filter((element, ind) => arr.indexOf(element) == ind)
+    .sort((a, b) => b - a);
+  const summ =
+    sortedArrWithoutDubl[0] + sortedArrWithoutDubl[1] + sortedArrWithoutDubl[2];
+  return summ;
+};
+
+//Task 35
+
+const arrayLeaders = arr => {
+  return arr.filter((elem, i) => {
+    return elem > arr.slice(i + 1, arr.length).reduce((a, b) => a + b, 0);
+  });
 };
