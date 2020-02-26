@@ -764,3 +764,161 @@ const smallestCommons = arr => {
     return lcm(a, b);
   });
 };
+
+//Task 66
+
+const isPrimeNum = n => {
+  let i = 2;
+  const limit = Math.sqrt(n);
+  while (i <= limit) {
+    if (n % i === 0) {
+      return false;
+    }
+    i += 1;
+  }
+
+  return true;
+};
+
+const sumPrimes = num => {
+  primeArr = [];
+  for (let i = 2; i <= num; i++) {
+    if (isPrimeNum(i)) primeArr.push(i);
+  }
+  return primeArr.reduce((a, b) => a + b);
+};
+
+//Task 67
+
+const findElement = (arr, func) => {
+  for (let i = 0; i < arr.length; i++) {
+    if (func(arr[i])) return arr[i];
+  }
+};
+
+//Task 68
+
+const dropElements = (arr, func) => {
+  for (let i = 0; i < arr.length; i++) {
+    if (func(arr[i])) return arr.slice(i);
+  }
+  return [];
+};
+
+//Task 69
+
+const unpackArray = arr => {
+  let newArr = [];
+  function unpack(arr) {
+    arr.forEach(item => {
+      if (!Array.isArray(item)) {
+        newArr.push(item);
+      } else {
+        unpack(item);
+      }
+    });
+  }
+  unpack(arr);
+  return newArr;
+};
+
+//Task 70
+
+const binaryDecode = str => {
+  let arrNum = str.split(" ");
+  return arrNum
+    .map(item => parseInt(item, 2))
+    .map(item => String.fromCharCode(item))
+    .join("");
+};
+
+//Task 71
+
+const binaryEncode = str => {
+  let arrWords = str.split("");
+  return arrWords
+    .map(item => item.charCodeAt())
+    .map(item => item.toString(2))
+    .join(" ");
+};
+
+//Task 72
+
+const addTogether = (...args) => {
+  let arg1 = args[0];
+  let arg2 = args[1];
+  if (typeof arg1 === "number" && typeof arg2 === "number") return arg1 + arg2;
+  if (typeof arg1 != "number") return undefined;
+  if (arg2 === undefined) {
+    return function summ(n) {
+      if (typeof n === "number") {
+        return arg1 + n;
+      }
+    };
+  }
+};
+
+//Task 73
+
+const palindrome = str => {
+  const simpleStr = str.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const reversedStr = str
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "")
+    .split("")
+    .reverse()
+    .join("");
+
+  return simpleStr == reversedStr ? true : false;
+};
+
+//Task 74
+
+const pairElement = str => {
+  const resultArr = [];
+  let pairArr = [];
+  const incorArr = str.split("");
+  for (let i = 0; i < incorArr.length; i++) {
+    if (incorArr[i] == "A") {
+      pairArr.push(incorArr[i]);
+      pairArr.push("T");
+      resultArr.push(pairArr);
+      pairArr = [];
+    } else if (incorArr[i] == "T") {
+      pairArr.push(incorArr[i]);
+      pairArr.push("A");
+      resultArr.push(pairArr);
+      pairArr = [];
+    } else if (incorArr[i] == "C") {
+      pairArr.push(incorArr[i]);
+      pairArr.push("G");
+      resultArr.push(pairArr);
+      pairArr = [];
+    } else if (incorArr[i] == "G") {
+      pairArr.push(incorArr[i]);
+      pairArr.push("C");
+      resultArr.push(pairArr);
+      pairArr = [];
+    }
+  }
+  return resultArr;
+};
+
+//Task 75
+
+const DNAStrand = str => {
+  const incorArr = str.split("");
+  for (let i = 0; i < incorArr.length; i++) {
+    if (incorArr[i] == "A") {
+      incorArr[i] = "T";
+    } else if (incorArr[i] == "T") {
+      incorArr[i] = "A";
+    } else if (incorArr[i] == "C") {
+      incorArr[i] = "G";
+    } else if (incorArr[i] == "G") {
+      incorArr[i] = "C";
+    }
+  }
+  const correctStr = incorArr.join("");
+  return correctStr;
+};
