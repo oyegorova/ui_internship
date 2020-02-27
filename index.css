@@ -1,0 +1,36 @@
+.main_content {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: larger;
+  color: rgb(119, 124, 129);
+  padding-top: 2em;
+}
+.top_menu {
+  background-color: black;
+}
+.menu_container {
+  display: flex;
+  justify-content: space-between;
+}
+.logo_container {
+  display: flex;
+  justify-content: flex-start;
+  width: 50vw;
+}
+.bar_container {
+  justify-content: center;
+}
+.top_menu .bar_container .nav-link {
+  color: white !important;
+}
+@media only screen and (min-width: 768px) {
+  .logo_container {
+    display: flex;
+    justify-content: center;
+    width: 50vw;
+  }
+}
+.top_menu .main-btn {
+  border-color: black !important;
+}
