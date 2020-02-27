@@ -9,6 +9,9 @@
 .top_menu {
   background-color: black;
 }
+.top_menu .logo_container .navbar-brand {
+  color: white;
+}
 .menu_container {
   display: flex;
   justify-content: space-between;
@@ -22,7 +25,7 @@
   justify-content: center;
 }
 .top_menu .bar_container .nav-link {
-  color: white !important;
+  color: white;
 }
 @media only screen and (min-width: 768px) {
   .logo_container {
@@ -32,5 +35,8 @@
   }
 }
 .top_menu .main-btn {
-  border-color: black !important;
+  border-color: black;
+}
+#menu-icon {
+  color: white;
 }
