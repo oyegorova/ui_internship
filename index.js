@@ -1100,3 +1100,41 @@ const validate_bet = (arr, str) => {
   }
   return arrNum;
 };
+
+//Task 86
+
+function showHumamReadableWorkingHours(arr) {
+  const days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+  const byDay = arr.reduce(
+    (acc, { day, from, to }) =>
+      Object.assign(acc, { [day.toUpperCase()]: `${from} - ${to}` }),
+    {}
+  );
+  let r = [];
+  let firstDay = "";
+  counter = 0;
+  for (let i = 0; i < days.length; i++) {
+    if (byDay[days[i]] == byDay[days[i + 1]] && counter == 0) {
+      firstDay = days[i];
+      counter = 1;
+    } else if (counter == 1 && byDay[days[i]] == byDay[days[i + 1]]) {
+      continue;
+    } else if (counter == 1 && byDay[days[i]] != byDay[days[i + 1]]) {
+      if (firstDay == days[i]) {
+        r.push(`${days[i]}: ${byDay[days[i]]}`);
+        firstDay = days[i + 1];
+      } else {
+        r.push(`${firstDay}-${days[i]}: ${byDay[days[i]]}`);
+        firstDay = days[i + 1];
+      }
+    }
+  }
+  return r;
+}
+
+//Task 87
+
+const telephoneCheck = str => {
+  var re = /^([+]?1[\s]?)?((?:[(](?:[2-9]1[02-9]|[2-9][02-8][0-9])[)][\s]?)|(?:(?:[2-9]1[02-9]|[2-9][02-8][0-9])[\s.-]?)){1}([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2}[\s.-]?){1}([0-9]{4}){1}$/;
+  return re.test(str);
+};
