@@ -228,3 +228,181 @@ const telephoneCheck = str => {
   var re = /^([+]?1[\s]?)?((?:[(](?:[2-9]1[02-9]|[2-9][02-8][0-9])[)][\s]?)|(?:(?:[2-9]1[02-9]|[2-9][02-8][0-9])[\s.-]?)){1}([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2}[\s.-]?){1}([0-9]{4}){1}$/;
   return re.test(str);
 };
+
+//Task 88
+
+var collection = {
+  "2548": {
+    album: "Slippery When Wet",
+    artist: "Bon Jovi",
+    tracks: ["Let It Rock", "You Give Love a Bad Name"]
+  },
+  "2468": {
+    album: "1999",
+    artist: "Prince",
+    tracks: ["1999", "Little Red Corvette"]
+  },
+  "1245": {
+    artist: "Robert Palmer",
+    tracks: []
+  },
+  "5439": {
+    album: "ABBA Gold"
+  }
+};
+
+var collectionCopy = JSON.parse(JSON.stringify(collection));
+const updateRecords = (id, prop, value) => {
+  if (prop != "tracks" && value != "") {
+    collectionCopy[id][prop] = value;
+  } else if (
+    prop == "tracks" &&
+    collectionCopy[id].hasOwnProperty(prop) === false
+  ) {
+    let tracksArr = [];
+    collectionCopy[id][prop] = tracksArr;
+    tracksArr.push(value);
+  } else if (
+    prop == "tracks" &&
+    collectionCopy[id].hasOwnProperty(prop) &&
+    collectionCopy[id][prop] != [] &&
+    value != ""
+  ) {
+    collectionCopy[id][prop].push(value);
+  } else if (
+    prop == "tracks" &&
+    collectionCopy[id].hasOwnProperty(prop) == [] &&
+    value == ""
+  ) {
+    delete collectionCopy[id][prop];
+  }
+  return collectionCopy[id];
+};
+
+//Task 89
+
+const sym = (...args) => {
+  const getDiff = (arr1, arr2) => {
+    function filterFunction(arr1, arr2) {
+      return arr1.filter(item => {
+        return arr2.indexOf(item) === -1;
+      });
+    }
+    return filterFunction(arr1, arr2)
+      .concat(filterFunction(arr2, arr1))
+      .filter((item, idx, arr) => {
+        return arr.indexOf(item) === idx;
+      });
+  };
+  return args.reduce(getDiff, []).sort();
+};
+
+//Task 90
+
+const checkCashRegister = (price, cash, cid) => {};
+console.log(
+  checkCashRegister(19.5, 20.0, [
+    ["PENNY", 1.01],
+    ["NICKEL", 2.05],
+    ["DIME", 3.1],
+    ["QUARTER", 4.25],
+    ["ONE", 90.0],
+    ["FIVE", 55.0],
+    ["TEN", 20.0],
+    ["TWENTY", 60.0],
+    ["ONE HUNDRED", 100.0]
+  ]),
+  "should return an array"
+);
+console.log(
+  checkCashRegister(19.5, 20.0, [
+    ["PENNY", 0.01],
+    ["NICKEL", 0],
+    ["DIME", 0],
+    ["QUARTER", 0],
+    ["ONE", 0],
+    ["FIVE", 0],
+    ["TEN", 0],
+    ["TWENTY", 0],
+    ["ONE HUNDRED", 0]
+  ]),
+  "should return a string"
+);
+console.log(
+  checkCashRegister(19.5, 20.0, [
+    ["PENNY", 0.5],
+    ["NICKEL", 0],
+    ["DIME", 0],
+    ["QUARTER", 0],
+    ["ONE", 0],
+    ["FIVE", 0],
+    ["TEN", 0],
+    ["TWENTY", 0],
+    ["ONE HUNDRED", 0]
+  ]),
+  "should return a string"
+);
+console.log(
+  checkCashRegister(19.5, 20.0, [
+    ["PENNY", 1.01],
+    ["NICKEL", 2.05],
+    ["DIME", 3.1],
+    ["QUARTER", 4.25],
+    ["ONE", 90.0],
+    ["FIVE", 55.0],
+    ["TEN", 20.0],
+    ["TWENTY", 60.0],
+    ["ONE HUNDRED", 100.0]
+  ]),
+  'should return [["QUARTER", 0.50]]'
+);
+console.log(
+  checkCashRegister(3.26, 100.0, [
+    ["PENNY", 1.01],
+    ["NICKEL", 2.05],
+    ["DIME", 3.1],
+    ["QUARTER", 4.25],
+    ["ONE", 90.0],
+    ["FIVE", 55.0],
+    ["TEN", 20.0],
+    ["TWENTY", 60.0],
+    ["ONE HUNDRED", 100.0]
+  ]),
+  [
+    ["TWENTY", 60.0],
+    ["TEN", 20.0],
+    ["FIVE", 15.0],
+    ["ONE", 1.0],
+    ["QUARTER", 0.5],
+    ["DIME", 0.2],
+    ["PENNY", 0.04]
+  ]
+);
+console.log(
+  checkCashRegister(19.5, 20.0, [
+    ["PENNY", 0.01],
+    ["NICKEL", 0],
+    ["DIME", 0],
+    ["QUARTER", 0],
+    ["ONE", 0],
+    ["FIVE", 0],
+    ["TEN", 0],
+    ["TWENTY", 0],
+    ["ONE HUNDRED", 0]
+  ]),
+  'should return "Insufficient Funds"'
+);
+console.log(
+  checkCashRegister(19.5, 20.0, [
+    ["PENNY", 0.5],
+    ["NICKEL", 0],
+    ["DIME", 0],
+    ["QUARTER", 0],
+    ["ONE", 0],
+    ["FIVE", 0],
+    ["TEN", 0],
+    ["TWENTY", 0],
+    ["ONE HUNDRED", 0]
+  ]),
+  'should return "Closed"'
+);
