@@ -299,110 +299,172 @@ const sym = (...args) => {
 
 //Task 90
 
-const checkCashRegister = (price, cash, cid) => {};
-console.log(
-  checkCashRegister(19.5, 20.0, [
-    ["PENNY", 1.01],
-    ["NICKEL", 2.05],
-    ["DIME", 3.1],
-    ["QUARTER", 4.25],
-    ["ONE", 90.0],
-    ["FIVE", 55.0],
-    ["TEN", 20.0],
-    ["TWENTY", 60.0],
-    ["ONE HUNDRED", 100.0]
-  ]),
-  "should return an array"
-);
-console.log(
-  checkCashRegister(19.5, 20.0, [
-    ["PENNY", 0.01],
-    ["NICKEL", 0],
-    ["DIME", 0],
-    ["QUARTER", 0],
-    ["ONE", 0],
-    ["FIVE", 0],
-    ["TEN", 0],
-    ["TWENTY", 0],
-    ["ONE HUNDRED", 0]
-  ]),
-  "should return a string"
-);
-console.log(
-  checkCashRegister(19.5, 20.0, [
-    ["PENNY", 0.5],
-    ["NICKEL", 0],
-    ["DIME", 0],
-    ["QUARTER", 0],
-    ["ONE", 0],
-    ["FIVE", 0],
-    ["TEN", 0],
-    ["TWENTY", 0],
-    ["ONE HUNDRED", 0]
-  ]),
-  "should return a string"
-);
-console.log(
-  checkCashRegister(19.5, 20.0, [
-    ["PENNY", 1.01],
-    ["NICKEL", 2.05],
-    ["DIME", 3.1],
-    ["QUARTER", 4.25],
-    ["ONE", 90.0],
-    ["FIVE", 55.0],
-    ["TEN", 20.0],
-    ["TWENTY", 60.0],
-    ["ONE HUNDRED", 100.0]
-  ]),
-  'should return [["QUARTER", 0.50]]'
-);
-console.log(
-  checkCashRegister(3.26, 100.0, [
-    ["PENNY", 1.01],
-    ["NICKEL", 2.05],
-    ["DIME", 3.1],
-    ["QUARTER", 4.25],
-    ["ONE", 90.0],
-    ["FIVE", 55.0],
-    ["TEN", 20.0],
-    ["TWENTY", 60.0],
-    ["ONE HUNDRED", 100.0]
-  ]),
-  [
-    ["TWENTY", 60.0],
-    ["TEN", 20.0],
-    ["FIVE", 15.0],
-    ["ONE", 1.0],
-    ["QUARTER", 0.5],
-    ["DIME", 0.2],
-    ["PENNY", 0.04]
-  ]
-);
-console.log(
-  checkCashRegister(19.5, 20.0, [
-    ["PENNY", 0.01],
-    ["NICKEL", 0],
-    ["DIME", 0],
-    ["QUARTER", 0],
-    ["ONE", 0],
-    ["FIVE", 0],
-    ["TEN", 0],
-    ["TWENTY", 0],
-    ["ONE HUNDRED", 0]
-  ]),
-  'should return "Insufficient Funds"'
-);
-console.log(
-  checkCashRegister(19.5, 20.0, [
-    ["PENNY", 0.5],
-    ["NICKEL", 0],
-    ["DIME", 0],
-    ["QUARTER", 0],
-    ["ONE", 0],
-    ["FIVE", 0],
-    ["TEN", 0],
-    ["TWENTY", 0],
-    ["ONE HUNDRED", 0]
-  ]),
-  'should return "Closed"'
-);
+const denom = [
+  { name: "ONE HUNDRED", val: 100.0 },
+  { name: "TWENTY", val: 20.0 },
+  { name: "TEN", val: 10.0 },
+  { name: "FIVE", val: 5.0 },
+  { name: "ONE", val: 1.0 },
+  { name: "QUARTER", val: 0.25 },
+  { name: "DIME", val: 0.1 },
+  { name: "NICKEL", val: 0.05 },
+  { name: "PENNY", val: 0.01 }
+];
+
+const checkCashRegister = (price, cash, cid) => {
+  let output = { status: null, change: [] };
+  let change = cash - price;
+  let register = cid.reduce(
+    function(acc, curr) {
+      acc.total += curr[1];
+      acc[curr[0]] = curr[1];
+      return acc;
+    },
+    { total: 0 }
+  );
+  if (register.total === change) {
+    output.status = "Closed";
+    output.change = cid;
+    return output.status;
+  }
+  if (register.total < change) {
+    output.status = "Insufficient Funds";
+    return output.status;
+  }
+  var change_arr = denom.reduce(function(acc, curr) {
+    let value = 0;
+    while (register[curr.name] > 0 && change >= curr.val) {
+      change -= curr.val;
+      register[curr.name] -= curr.val;
+      value += curr.val;
+      change = Math.round(change * 100) / 100;
+    }
+    if (value > 0) {
+      acc.push([curr.name, value]);
+    }
+    return acc;
+  }, []);
+  if (change_arr.length < 1 || change > 0) {
+    output.status = "Insufficient Funds";
+    return output.status;
+  }
+  output.status = "Open";
+  output.change = change_arr;
+  return output.change;
+};
+
+//Taks 91
+
+const updateInventory = (arr1, arr2) => {
+  const inventory = Array.prototype.concat.apply([], arr1);
+  for (let i = 0; i < arr2.length; i++) {
+    const position = inventory.indexOf(arr2[i][1]);
+    if (position !== -1) {
+      const row = Math.floor(position / 2);
+      arr1[row][0] += arr2[i][0];
+      continue;
+    }
+    arr1.push([arr2[i][0], arr2[i][1]]);
+  }
+  arr1.sort((previous, next) => (previous[1] > [next[1]] ? 1 : -1));
+  return arr1;
+};
+
+//Task 92
+
+const countPermutations = string => {
+  const perms = str => {
+    const result = [];
+    if (str.length < 2) return [str];
+    for (let i = 0; i < str.length; i++) {
+      const char = str[i];
+      const otherChars = str.substring(0, i) + str.substring(i + 1);
+      const otherPerms = perms(otherChars);
+      otherPerms.forEach(x => {
+        result.push(char + x);
+      });
+    }
+    return result;
+  };
+
+  const permutations = perms(string);
+
+  const hasRepeat = str => {
+    let prevChar = str[0];
+    for (let i = 1; i < str.length; i++) {
+      if (prevChar === str[i]) return true;
+      prevChar = str[i];
+    }
+    return false;
+  };
+
+  const noRepeatPerms = [];
+  for (const str of permutations) {
+    if (!hasRepeat(str)) {
+      noRepeatPerms.push(str);
+    }
+  }
+
+  return noRepeatPerms.length;
+};
+
+//Task 93
+
+class Person {
+  constructor(fullName) {
+    this.fullName = fullName;
+  }
+  getFullName() {
+    return this.fullName;
+  }
+  getFirstName() {
+    return this.fullName.split(" ")[0];
+  }
+  getLastName() {
+    return this.fullName.split(" ")[1];
+  }
+  setFirstName(first) {
+    const nameArr = this.fullName.split(" ");
+    nameArr[0] = first;
+    this.fullName = nameArr.join(" ");
+  }
+  setLastName(last) {
+    const nameArr = this.fullName.split(" ");
+    nameArr[1] = last;
+    this.fullName = nameArr.join(" ");
+  }
+  setFullName(firstAndLast) {
+    this.fullName = firstAndLast;
+  }
+}
+
+//Task 94
+
+const orbitalPeriod = arr => {
+  const GM = 398600.4418;
+  const EARTH_RADIUS = 6367.4447;
+  let resultArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    let { name, avgAlt } = arr[i];
+    const orbitalPeriod = Math.round(
+      2 * Math.PI * Math.sqrt(Math.pow(EARTH_RADIUS + avgAlt, 3) / GM)
+    );
+    resultArr.push({ name, orbitalPeriod });
+  }
+  return resultArr;
+};
+
+//Task 95
+
+const pairwise = (arr, arg) => {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] + arr[j] == arg) {
+        sum += i + j;
+        arr[i] = arr[j] = NaN;
+      }
+    }
+  }
+  return sum;
+};
