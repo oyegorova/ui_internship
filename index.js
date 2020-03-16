@@ -463,3 +463,18 @@ const leastCommonMultiple = (num1, num2) => {
   } while (multiplieNum % smallestNum != 0);
   return multiplieNum;
 };
+
+//Task 104
+
+const traverseTree = function(tree, callback) {
+  callback(tree.value);
+  if (tree.children.length > 0) {
+    for (let elem of tree.children) {
+      traverseTree(elem, callback);
+    }
+  }
+};
+
+function callback(argument) {
+  return console.log(argument);
+}
