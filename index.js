@@ -193,7 +193,7 @@ const titleCase = str => {
 
 //Task 46
 
-function runningAverage(num) {
+function runningAverage() {
   let total = 0;
   let calls = 0;
   return function(n) {
@@ -215,37 +215,33 @@ const stringExpansion = str => {
 
 const followTheSpy = arr => {
   let correctRoute = [];
-  arr
-    .map(elem => {
-      if (!arr.find(country => country[1] === elem[0])) {
-        correctRoute.push(elem[0]);
-        correctRoute.push(elem[1]);
-      }
-    })
-    .map(() => {
-      arr.map(elem => {
-        elem[0] === correctRoute[correctRoute.length - 1] &&
-          correctRoute.push(elem[1]);
-      });
+  arr.map(countryPair => {
+    if (!arr.find(country => country[1] === countryPair[0])) {
+      correctRoute.push(...countryPair);
+    }
+    arr.forEach(country => {
+      country[0] === correctRoute[correctRoute.length - 1] &&
+        correctRoute.push(country[1]);
     });
+  });
   return correctRoute.join(",");
 };
 
 //Task 49
 
 const humanYearsCatYearsDogYears = humYears => {
-  let yearsArr = [humYears, 0, 0];
-  if (humYears === 1) {
-    yearsArr[1] = 15;
-    yearsArr[2] = 15;
-  } else if (humYears === 2) {
-    yearsArr[1] = 24;
-    yearsArr[2] = 24;
-  } else if (humYears >= 3) {
-    yearsArr[1] = 24 + 4 * (humYears - 2);
-    yearsArr[2] = 24 + 5 * (humYears - 2);
+  const catsMultipliers = [15, 9, 4];
+  const dogsMultipliers = [15, 9, 5];
+
+  let catYears = 0;
+  let dogYears = 0;
+
+  for (let i = 0; i < humYears; i++) {
+    catYears += i >= 3 ? catsMultipliers[2] : catsMultipliers[i];
+    dogYears += i >= 3 ? dogsMultipliers[2] : dogsMultipliers[i];
   }
-  return yearsArr;
+
+  return [humYears, catYears, dogYears];
 };
 
 //Task 50
