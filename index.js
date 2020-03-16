@@ -194,7 +194,6 @@ const titleCase = str => {
 //Task 36
 
 const rowWeights = arr => {
-  const finalArr = [];
   const valueArr1 = arr
     .filter((elem, i) => {
       return i % 2 == 0;
@@ -209,8 +208,7 @@ const rowWeights = arr => {
     .reduce((a, b) => {
       return a + b;
     }, 0);
-  finalArr.push(valueArr1, valueArr2);
-  return finalArr;
+  return [valueArr1, valueArr2];
 };
 
 //Task 37
@@ -248,19 +246,14 @@ const maxProduct = arr => {
   for (let i = 0; i < arr.length - 1; i++) {
     sums[i] = arr[i] * arr[i + 1];
   }
-  sums.sort((a, b) => b - a);
-  return sums[0];
+  return Math.max.apply(null, sums);
 };
 
 //Task 39
 
 const uniqueInOrder = value => {
-  if (typeof value === String) {
-    let arr = value.split("");
-    return arr.filter((element, ind) => arr.indexOf(element) == ind);
-  } else {
-    return value.filter((element, ind) => value.indexOf(element) == ind);
-  }
+  let arr = typeof value === "string" ? value.split("") : value;
+  return arr.filter((element, ind) => arr.indexOf(element) == ind);
 };
 
 //Task 40
@@ -345,7 +338,6 @@ function SimTime() {
   };
   this.set_speed = function(new_speed) {
     this.speed = new_speed;
-    //this.realtime *= new_speed;
   };
   this.update = function(current_realtime) {
     this.time = this.time + (current_realtime - this.realtime) * this.speed;
@@ -358,9 +350,7 @@ function SimTime() {
 const findEqualIndex = arr => {
   let sum = 0;
   let leftSum = 0;
-  for (let i = 0; i < arr.length; i++) {
-    sum += arr[i];
-  }
+  sum = arr.reduce((acc, elem) => acc + elem);
   for (let i = 0; i < arr.length; i++) {
     sum -= arr[i];
     if (leftSum === sum) {
